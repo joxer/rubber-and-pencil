@@ -1,0 +1,275 @@
+<html>
+<head>
+<title>Franco Candido</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link href='http://fonts.googleapis.com/css?family=Headland+One' rel='stylesheet' type='text/css'>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="creole.js"></script>
+<script src="signals.min.js"></script>
+<script src="crossroad.min.js"></script>
+<script src="cms.js"></script>
+<script src="hasher.min.js"></script>
+
+<script>
+
+function slideSwitch() {
+    var $active = $('#slideshow IMG.active');
+
+    if ( $active.length == 0 ) $active = $('#slideshow IMG:last');
+
+    var $next =  $active.next().length ? $active.next()
+        : $('#slideshow IMG:first');
+
+    $active.addClass('last-active');
+        
+    $next.css({opacity: 0.0})
+        .addClass('active')
+        .animate({opacity: 1.0}, 1000, function() {
+            $active.removeClass('active last-active');
+        });
+}
+
+$(function() {
+    setInterval( "slideSwitch()", 5000 );
+});
+
+$(document).ready(function () {
+      $('#nav li').hover(
+        function () {
+            //mostra sottomenu
+            $('ul', this).stop(true, true).delay(50).slideDown(100);
+ 
+        },
+        function () {
+            //nascondi sottomenu
+            $('ul', this).stop(true, true).slideUp(200);       
+        }
+    );
+});
+
+
+$(document).ready(function(){
+l = new lolcms()
+l.bootstrap();
+crossroads.addRoute(/#!blog*/, function(id){
+
+alert(id)
+  console.log(id);
+});
+
+ var options = {}
+    options.forIE = document.all;
+    options.interwiki = {
+            MeatBall: 'http://www.usemod.com/cgi-bin/mb.pl?',
+            WikiCreole: 'http://www.wikicreole.org/wiki/',
+            Palindrome: function(link) {
+                    return 'http://www.example.com/wiki/' + link.split('').reverse().join('');
+                }
+        };
+    options.linkFormat = '/wiki/';
+var c = new creole(options);
+$(".markup").each(function(){
+var html = $(this).html();
+$(this).html("")
+c.parse(this,html)
+})
+
+})
+
+</script>
+
+<style>
+
+body{
+margin:0;
+padding:0;
+border:0;
+width:100%;
+//background-color:rgb(15,45,64);
+}
+
+#slideshow {
+position:relative;
+height:200px;
+width:100%;
+position:fixed;
+}
+
+#slideshow IMG {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:8;
+width:100%;
+height:200px;
+
+box-shadow: 0px 3px 10px rgb(50,50,50);
+}
+
+#slideshow IMG.active {
+    z-index:10;
+}
+
+#slideshow IMG.last-active {
+    z-index:9;
+}
+
+
+#central{
+top:200px;
+position:relative;
+
+padding-bottom:45px;
+padding-left:15px;
+padding-right:15px;
+width:800px;
+
+
+background-color:rgb(40,164,182);
+border-right: 2px solid rgb(20,144,162);
+border-left: 2px solid rgb(20,144,162);
+
+margin:0px;
+margin-left:auto;
+margin-right:auto;
+
+color:white;
+
+}
+
+#central-inner{
+
+padding-top:50px;
+}
+
+
+#title{
+font-family: 'Headland One', serif;
+left:50px;
+top:30px;
+color:rgb(240,240,240);
+position:fixed;
+z-index:15;
+font-size:4em;
+}
+
+#nav {
+
+    margin:0;
+    padding:0;
+    list-style:none;
+padding-top:15px;
+margin-left:auto;
+margin-right:auto;
+}  
+ 
+#nav li {
+    float:left;
+    display:block;
+    width:198px;
+
+    background:#E0E0E0;
+    position:relative;
+    z-index:500;
+    margin:0 1px;
+    -webkit-transition: all 0.1s ease-in-out;
+        -moz-transition: all 0.1s ease-in-out;
+        -ms-transition: all 0.1s ease-in-out;
+        -o-transition: all 0.1s ease-in-out;
+        transition: all 0.1s ease-in-out;
+}
+#nav li.first {
+        -moz-border-radius:5px 0 0 5px;
+        -webkit-border-radius:5px 0 0 5px;
+    border-radius:5px 0 0 5px;
+    }
+#nav li.last {
+        -webkit-border-radius:0 5px 5px 0;
+    -moz-border-radius:0 5px 5px 0;
+        border-radius:0 5px 5px 0;
+    }
+#nav li li.last {
+        -webkit-border-radius:0 0 5px 5px;
+    -moz-border-radius:0 0 5px 5px;
+        border-radius:0 0 5px 5px;
+    }
+#nav li a {
+    display:block;
+    padding:8px 5px 0 5px;
+    font-weight:700;
+    height:23px;
+    text-decoration:none;
+    text-align:center;
+    color:#333;
+}
+#nav li a:hover {
+    color:#C00;
+}
+#nav li li:hover {
+    -webkit-transform: translate(+10px,0);
+    }
+#nav a.selected {
+    color:#C00;
+}
+#nav ul {
+    position:absolute;
+    left:0;
+    display:none;
+    margin:0 0 0 -1px;
+    padding:0;
+    list-style:none;
+}
+#nav ul li {
+    width:100px;
+    float:left;
+    border-top:1px solid #fff;
+}
+#nav ul a {
+    display:block;
+    height:auto;
+    padding: 8px 5px;
+    color:#666;
+}
+/* fix ie6, meglio inserirlo in un file .css separato */
+*html #nav ul {
+    margin:0 0 0 -2px;
+}
+
+
+</style>
+
+
+</head>
+<body>
+  <div id="wrap-page" >
+    
+
+    <div id="title">
+      Franco Candido
+    </div>
+
+    <div id="slideshow">
+      <img src="images/01.jpg" alt="" class="active" />
+      <img src="images/04.jpg" alt="" />
+      <img src="images/06.jpg" alt="" />
+    </div>
+
+
+
+    <div id="central">
+      <ul id="nav">
+	<li  class="first"><a id="first" href="#">About</a></li>
+	<li><a id="second" href="#" >Libri</a>
+	<li><a id="third" href="#">Link</a>
+	<li class="last" id="fourth"><a href="#">Altro</a></li>
+      </ul>
+      <div id="central-inner">
+	<div id="generated" class="markup">
+	</div>
+      </div>
+    </div>
+
+</div>
+</body>
+</html>
