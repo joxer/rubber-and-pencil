@@ -18,20 +18,27 @@ function lolcms(){
     };
     options.linkFormat = '/wiki/';
     var _creole = new creole(options);
-
+    hasher.prependHash = '!';
     this.bootstrap = function(){
-
+	
 	function handleChanges(newHash, oldHash){
-	    console.log(newHash);
+	    
 
 	    if(newHash == "")
-		newHash = "!index";
-		getPage(newHash.replace("!",""));
+		hasher.setHash("index");
+	    else{
+		if(newHash == "index")
+		    setPage(0,3);
+		else
+		    getPage(newHash.replace("!",""));
+	    }
 
+	    
+	    
 	}
 
-		    hasher.changed.add(handleChanges); //add hash change listener
-	    hasher.initialized.add(handleChanges); //add initialized listener (to grab initial value in case it is already set)
+	hasher.changed.add(handleChanges); //add hash change listener
+	hasher.initialized.add(handleChanges); //add initialized listener (to grab initial value in case it is already set)
 	
 
 	
@@ -114,13 +121,39 @@ function lolcms(){
 	}
     }
 
-    function getPage(key){
+    function getPage  (key){
 
-	$("#generated").html("")
-
-	_creole.parse(document.getElementById("generated"),find_page(key));
+	$("#generated").html("");
+	
+	//$("#generated-title").html("");
+	//$("#generated-text").html("");
+	$("#generated").append("<div class='generated-title' id='generated-title'></div><div class='generated-text' id='generated-text'></div>")
+	$("#generated-title").html("<a href='#!"+key+"' >"+key+"</a>");
+//	$("#generated-text").html(find_page(key));
+	_creole.parse(document.getElementById("generated-text"),find_page(key));
     }
 
+    this.requestPage = function(key){
+
+	getPage(key)
+    }
+
+    function setPage(limit_a,limit_b){
+	
+	$("#generated").html("");
+	for(var i = limit_a;i < limit_b;i++){
+
+	    $("#generated").append("<div class='generated-title' id='generated-title-"+i+"'></div><div class='generate-text' id='generated-text-"+i+"'></div>")
+
+	    //	$("#genereated").append("<div id='generated-title'></div><div id='generated-text'></div>")
+	    $("#generated-title-"+i).html("<a href='#"+_pages[i].title+"')'>"+_pages[i].title+"</a>");
+	    //	$("#generated-text").html(find_page(key));
+	    
+	    _creole.parse(document.getElementById("generated-text-"+i),find_page(_pages[i].title));
+	}
+    }
+
+    
     function find_page(key){
 	
 	for(i in _pages){
@@ -129,6 +162,7 @@ function lolcms(){
 		return _pages[i].text
 	    }
 	}
+	
 
     }
 

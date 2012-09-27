@@ -48,9 +48,9 @@ $(document).ready(function () {
     );
 });
 
-
-$(document).ready(function(){
 l = new lolcms()
+$(document).ready(function(){
+
 l.bootstrap();
 crossroads.addRoute(/#!blog*/, function(id){
 
@@ -165,13 +165,14 @@ margin-right:auto;
 }  
  
 #nav li {
+
     float:left;
     display:block;
     width:198px;
 
     background:#E0E0E0;
     position:relative;
-    z-index:500;
+    z-index:1;
     margin:0 1px;
     -webkit-transition: all 0.1s ease-in-out;
         -moz-transition: all 0.1s ease-in-out;
@@ -236,6 +237,11 @@ margin-right:auto;
     margin:0 0 0 -2px;
 }
 
+.generated-title{
+
+font-size:4em;
+
+}
 
 </style>
 
@@ -265,11 +271,14 @@ margin-right:auto;
 	<li class="last" id="fourth"><a href="#">Altro</a></li>
       </ul>
       <div id="central-inner">
-	<div id="generated" class="markup">
+	<div id="generated">
+	  <div id="generated-title">
+	  </div>
+	  <div id="generated-text">
+	  </div>
 	</div>
       </div>
     </div>
-
-</div>
+  </div>
 </body>
 </html>

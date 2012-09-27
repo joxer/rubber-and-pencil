@@ -9,14 +9,14 @@
 ,
  "links":{
  
-          "first": "index",
+          "first": "grisù",
           "second": "tulipani",
           "third": "giardino"
 	  
 	  }
 ,
 "pages":{
-	"index": "[[WikiCreole:Creole1.0|{{http://www.wikicreole.org/attach/LeftMenu/viki.png|Creole 1.0}}]]\\What you see is a live demonstration of [[WikiCreole:Creole1.0|Creole 1.0]] parser, written entirely in [[Wikipedia:JavaScript|JavaScript]]. Creole is a wiki markup language, intended to be a cross standard for various wiki markup dialects. Modifying the text in the textarea below results in instant rendering XHTML without page reload. Try it //right now//!\n * aaa\nit *See [[WikiCreole:CheatSheet|Creole 1.0 Cheat Sheet]] for editing tips.",	"culetto":"lercio",
+	"grisù": "[[WikiCreole:Creole1.0|{{http://www.wikicreole.org/attach/LeftMenu/viki.png|Creole 1.0}}]]\\What you see is a live demonstration of [[WikiCreole:Creole1.0|Creole 1.0]] parser, written entirely in [[Wikipedia:JavaScript|JavaScript]]. Creole is a wiki markup language, intended to be a cross standard for various wiki markup dialects. Modifying the text in the textarea below results in instant rendering XHTML without page reload. Try it //right now//!\n * aaa\nit *See [[WikiCreole:CheatSheet|Creole 1.0 Cheat Sheet]] for editing tips.",	"culetto":"lercio",
 	"tulipani":"blue",
 	"giardino": "del mio capitano"
 	}
