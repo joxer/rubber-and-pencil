@@ -178,10 +178,11 @@ function configurer(){
 
     this.getConf = function(){
 	this.title = $("#title-site").attr("value")
-	this.js = $("#textarea-js").attr("value")
-	this.css = $("#textarea-css").attr("value")
-	this.menu = $("#menu-links").attr("value")
+
+
 	this.saveLinks();
+	this.saveCss();
+	this.saveJavascript();
     }
     
     this.save_article = function(editor){
@@ -209,10 +210,78 @@ function configurer(){
     this.saveLinks = function(){
 
 	var links =  []
-
-	$.each(this.menu.split(";"),function(){links.push({title: this.split(":")[0], link: this.split(":")[1]})});
+	this.menu = $("#menu-links").attr("value")
+	$.each(this.menu.split(";"),function(index){links.push({title: index, link: this})});
     	this.menu = links
     }
+
+    this.saveCss = function(){
+
+	
+	var css = []
+	this.css = $("#textarea-css").attr("value")
+	$.each(this.css.split("\n"),function(){css.push({link: this})});
+	this.css = css;
+    }
+
+    this.saveJavascript = function(){
+	this.js = $("#textarea-js").attr("value")
+	var js = []
+	$.each(this.js.split("\n"),function(){js.push({link: this})});
+	this.js = js;
+
+    }
     
+    this.dumpJSON = function(){
+
+	var json = "{";
+
+	//add scripts
+	json += "\"script\": [";
+	$(this.js).each(function(){json += "\""+this.link+"\","});
+	if(this.js != null)
+	json = json.substring(0,json.length-1)	    
+	json +="],";
+	
+	//add css
+	json += "\"css\": [";
+	$(this.css).each(function(){json += "\""+this.link+"\","});
+	if(this.css != null)
+	json = json.substring(0,json.length-1)
+
+	json +="],";
+	
+	//add links
+
+	json += "\"links\":{";
+	$(this.menu).each(function(index){
+
+	    json += "\""+index+"\":\""+this.link+"\",";
+	});
+	if(!arrays_equal(this.menu , []) || this.menu == null)
+	    json = json.substring(0,json.length-1)
+
+	json += "},";
+	//add text
+	
+	json += "\"pages\":{";
+        $(this.articles).each(function(){
+
+	    json += "\""+this.title+"\":\""+this.text+"\,";
+	});	
+
+	if(!arrays_equal(this.articles , []) || this.articles == null )
+	    json = json.substring(0,json.length-1)
+	
+	json += "}";
+	
+	json +="}";
+	console.log(json);
+    }
+    
+    function arrays_equal(a,b) { return !(a<b || b<a); }
+
+
 }
 var configurer = new configurer()
+
