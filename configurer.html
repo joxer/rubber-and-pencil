@@ -1,0 +1,209 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="jquery.qtip.min.js"></script>
+<link href="wysiwyg/css/wkrte.css" rel='stylesheet' type='text/css'>
+<link href="jquery.qtip.css" rel='stylesheet' type='text/css'>
+<script src="wysiwyg/js/wkrte.js">
+</script>
+<script src="cms.js"></script>
+
+<script type="text/javascript">
+
+
+  var arr;
+  $(document).ready(function() {
+  arr = $('.wkrte').rte({
+  width: 720,
+  height: 480,
+  controls_rte: rte_toolbar,
+  controls_html: html_toolbar
+  });             
+
+  $("#title-site").qtip({
+	content: {
+		text: 'Insert site title'
+  },
+    position:{
+  my: "left center",
+  at: "right center"
+
+  },
+style: {
+		classes: 'ui-tooltip-blue ui-tooltip-shadow tips'
+
+  }
+  })
+  
+  $("#textarea-js").qtip({
+	content: {
+		text: 'Insert js sources'
+  },
+    position:{
+  my: "left center",
+  at: "right center"
+
+  },
+style: {
+		classes: 'ui-tooltip-blue ui-tooltip-shadow tips'
+
+  }
+
+  }),
+ $("#textarea-css").qtip({
+	content: {
+		text: 'Insert css sources'
+  },
+  position:{
+  my: "left center",
+  at: "right center"
+
+  },
+style: {
+		classes: 'ui-tooltip-blue ui-tooltip-shadow tips'
+
+  
+  }})
+   $("#menu-links").qtip({
+	content: {
+		text: 'Insert links of the menu'
+
+  },
+  position:{
+  my: "left center",
+  at: "right center"
+
+  },
+style: {
+		classes: 'ui-tooltip-blue ui-tooltip-shadow tips'
+
+  }
+
+
+  })
+
+   })
+
+</script>
+<style>
+
+.tips{
+
+font-size:1em;
+padding:7px;
+}
+
+body{
+margin:0;
+padding:0;
+border:0;
+}
+
+#content-wrapper{
+
+
+width:800px;
+margin:0px;
+margin-left:auto;
+margin-right:auto;
+background-color: rgb(178,207,192);
+padding-bottom:50px;
+}
+
+#wrapper{
+margin:0;
+margin-top:50px;
+margin-left:auto;
+margin-right:auto;
+margin-bottom:35px;
+top:50px;
+height:480px;
+width:720px;
+background-color:white;
+}
+
+#save-cont{
+
+top:80px;
+width:720px;
+height:50px;
+margin:0;
+margin-left:40px;
+margin-right:40px;
+}
+
+#upper-banner{
+
+width:100%;
+margin:0;
+padding:0;
+border:0;
+height:100px;
+background-color:rgb(113,157,152);
+color: rgb(189,65,65);
+font-size:4em;
+
+padding-top:5px;
+}
+
+input{
+
+width:100%;
+height:50px;
+}
+
+textarea{
+
+width:100%;
+height:100px;
+}
+
+.label{
+padding:5px;
+margin:0px;
+border:0px;
+width:100%;
+font-size:2em;
+text-align:center;
+}
+
+</style>
+</head>
+<body>
+
+<div id="upper-banner">
+  Configurator
+</div>
+<div id="content-wrapper">
+  <p  class="label" id="title-site-label">Title site</p>
+  <input type="text" id="title-site" />
+  <br>
+  <p class="label" for="textarea-js" >javascripts</p>
+  <textarea id="textarea-js"></textarea>
+  <br>
+  <p class="label" for="textarea-css" >css</p>
+  <textarea id="textarea-css"></textarea>
+  <br>
+  <p class="label"  >menu links</p>
+  <textarea id="menu-links"></textarea>
+  <br>
+
+  <div id="articles">
+    <ul id="articles-list">
+    </ul>
+  </div>
+
+  <p class="label" >Articole name</p>
+  <input type="text" id="title-art"/>
+  <br>
+  <div id="wrapper">
+    <textarea cols="70" rows="20" class="wkrte" method="post" action="#">
+     </textarea>
+  </div>
+  <button id="save-cont" onclick="configurer.save_article(arr[0])">Save content</button>
+  </div>
+</div>
+</body>
+</html>

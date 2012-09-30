@@ -159,7 +159,8 @@ function lolcms(){
 	for(i in _pages){
 	    
 	    if(_pages[i].title == key){
-		return _pages[i].text
+
+		return $.base64.decode(_pages[i].text);
 	    }
 	}
 	
@@ -167,3 +168,51 @@ function lolcms(){
     }
 
 }
+
+function configurer(){
+    this.title;
+    this.js;
+    this.css;
+    this.menu = []; 
+    this.articles = []
+
+    this.getConf = function(){
+	this.title = $("#title-site").attr("value")
+	this.js = $("#textarea-js").attr("value")
+	this.css = $("#textarea-css").attr("value")
+	this.menu = $("#menu-links").attr("value")
+	this.saveLinks();
+    }
+    
+    this.save_article = function(editor){
+	var title = $("#title-art").attr("value")
+	var text = editor.get_content();
+	this.articles.push({title:title, text:text})
+	
+	$("#articles-list").append("<li id='"+title+"'>"+title+" - <a onclick='configurer.remove_article(\""+title+"\")' href='#remove-articles'>remove</a></li>")
+
+	editor.set_content("")
+	$("#title-art").attr("value","")
+    }
+    
+    this.remove_article = function(title){
+	for( x in this.articles){
+
+	    if(this.articles[x].title == title){
+		$("#"+this.articles[x].title).remove()
+		this.articles.splice(x,1);
+
+	    }
+	};
+    }
+
+    this.saveLinks = function(){
+
+	var links =  []
+
+	$.each(this.menu.split(";"),function(){links.push({title: this.split(":")[0], link: this.split(":")[1]})});
+    	this.menu = links
+    }
+    
+}
+var configurer = new configurer()
